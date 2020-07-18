@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上机题</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        [v-clock]{
+            display: none;
+        }
+        #app{
+            width: 100%;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <el-button @click="dialogFormVisible  = true">选择课程</el-button>
+
+<!--弹框页面的渲染  -->
+    <el-dialog title="添加课程" :visible.sync="dialogFormVisible" :width="dialogWidth">
+<!--搜索框  -->
+        <el-form :model="form" :inline="true">
+            <el-form-item >
+              <el-input v-model="form.name" placeholder="请输入内容"></el-input>
+            </el-form-item >
+              <el-form-item >
+              <el-button type="primary" @click="onSubmit">搜索</el-button>
+            </el-form-item>
+        </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false" >确 定</el-button>
+          </div> 
+<!-- 导航栏 -->
+<template>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="图文" name="first" >
+        <el-scrollbar
+        wrapClass="scrollbar-wrap"
+        :style="{height: scrollHeight}"
+        ref="scrollbarContainer">
+        <div class="intent-course-wrapper">
+            <div class="class-category" v-for="(firItem, firIndex) in tabledata" :key="firIndex">
+              <div class="class-details" v-for="(subItem, subIndex) in firItem.classData" :key="subIndex">
+                <el-checkbox v-model="subItem.mychecked" @change="secondChanged(firIndex)" style="vertical-align: middle;"></el-checkbox>
+                <img v-lazy="subItem.kechengtupian_path" class="class-img" style="width: 100px ;height:80px; vertical-align: middle;"/>
+                <div class="sub-details" style="display: inline-block;margin-top: 10px;margin-left: 20px;">
+                  <p class="course-name" >{{ subItem.courseName }}</p>
+                  <div class="course-time" style="color: red;">
+                    {{subItem.coursePrice}}
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </el-scrollbar>
+      </el-tab-pane>
+      <el-tab-pane label="音频" name="second">
+      </el-tab-pane>
+      <el-tab-pane label="视频" name="third">
+      </el-tab-pane>
+      <el-tab-pane label="录播" name="fourth">
+      </el-tab-pane>
+      <el-tab-pane label="直播" name="fifth">
+      </el-tab-pane>
+      <el-tab-pane label="班级" name="sixth">
+      </el-tab-pane>
+      <el-tab-pane label="题库" name="seventh">
+      </el-tab-pane>
+    </el-tabs>
+  </template>
+    </el-dialog>
+</div>
+<script crossorigin="anonymous" src="https://lib.baomitu.com/vue/2.6.11/vue.min.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+          scrollHeight:'0px',
+        dialogTableVisible: false,
+        dialogFormVisible: false,
+            form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        dialogWidth:"700px",
+        activeName: 'second',
+        checked: true,
+        multipleSelection: [],
+        tabledata: [
+        {
+          classData: [
+            {
+              courseId: 'KC-2',
+              user: 'AS',
+              owner: 'AS',
+              id: '1f792fe742fb4dbba4af7b899c962567',
+              courseName: '高数',
+              coursePrice: '￥100',
+              kechengtupian_path: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            }
+          ]
+        },
+        {
+          classData: [
+            {
+              courseId: 'KC-2',
+              user: 'AS',
+              owner: 'AS',
+              id: '1f792fe742fb4dbba4af7b899c962567',
+              courseName: '物理',
+              coursePrice: '￥300',
+              kechengtupian_path: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            },
+            {
+              courseId: 'KC-2',
+              user: 'AS',
+              owner: 'AS',
+              id: '1f792fe742fb4dbba4af7b899c962567',
+              courseName: '语文',
+              coursePrice: '￥100',
+              kechengtupian_path: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            },
+            {
+              courseId: 'KC-2',
+              user: 'AS',
+              owner: 'AS',
+              id: '1f792fe742fb4dbba4af7b899c962567',
+              courseName: '英语',
+              coursePrice: '￥50',
+              kechengtupian_path: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            },
+            {
+              courseId: 'KC-2',
+              user: 'AS',
+              owner: 'AS',
+              id: '1f792fe742fb4dbba4af7b899c962567',
+              courseName: 'java',
+              coursePrice: '￥250',
+              kechengtupian_path: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+            }
+          ]
+        }
+      ],
+      },
+        methods:{
+            onSubmit() {
+               console.log('submit!');
+               //this.$router.push(supplyList/id/+this.supply_store_id);
+
+      },
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+      },
+      // 一级change事件
+    firstChanged(index) {
+      const { classData } = this.tabledata[index];
+      if (this.tabledata[index].mychecked === false) {
+        classData.forEach((item) => {
+          this.$set(item, 'mychecked', false);
+        });
+      } else {
+        classData.forEach((item) => {
+          this.$set(item, 'mychecked', true);
+        });
+      }
+    },
+    // 二级change事件
+    secondChanged(index) {
+      const subData = this.tabledata[index].classData;
+      let tickCount = 0;
+      const len = subData.length;
+      for (let i = 0; i < len; i += 1) {
+        if (subData[i].mychecked === true) {
+          tickCount += 1;
+        } else {
+          tickCount -= 1;
+        }
+      }
+      if (tickCount === len) {
+        // 二级全勾选  一级勾选
+        this.$set(this.tabledata[index], 'mychecked', true);
+      } else {
+        // 二级未全选  一级不勾选
+        this.$set(this.tabledata[index], 'mychecked', false);
+      }
+    },
+    // 总的全选
+    handleSelectAllClassfiy(val) {
+      if (val) {
+        for (let i = 0; i < this.tabledata.length; i += 1) {
+          this.tabledata[i].mychecked = true;
+          this.firstChanged(i); // 调用一级change事件
+        }
+      } else {
+        for (let i = 0; i < this.tabledata.length; i += 1) {
+          this.tabledata[i].mychecked = false;
+          this.firstChanged(i); // 调用一级change事件
+        }
+      }
+    },
+},
+        mounted(){
+          this.scrollHeight = window.innerHeight*0.7 + 'px';
+        }, 
+        computed:{
+          // 全选功能
+    allChecked: {
+      get () {
+        let count = 0;
+        for (let i = 0; i < this.tabledata.length; i += 1) {
+          if (this.tabledata[i].mychecked === true) {
+            count += 1;
+          } else {
+            count -= 1;
+          }
+        }
+        if (count === this.tabledata.length) {
+          return true;
+        }
+        return false;
+      },
+      set (val) {
+        return val;
+      }
+    },
+    tables () {                                          //模糊搜素
+        const search = this.search
+        if (search) {
+          return this.tabledata.filter(classData => {
+            return Object.keys(classData).some(key => {
+              return String(classData[key]).toLowerCase().indexOf(search) > -1
+            })
+          })
+        }
+        return this.tabledata
+      }
+    },
+
+  
+    })
+    
+</script>
+</body>
+</html>
