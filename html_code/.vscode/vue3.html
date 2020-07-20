@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!-- 回顾疑问：template、props、字符串模板？ -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 此处维护会出现错误？？ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <base-input v-model="username" required placeholder="Enter your username">
+
+    </base-input>
+    <!-- <script>
+        Vue.component('base-input',{
+            inheritAttrs:false,
+            props:['label','value'],
+            template:
+            <label>
+                {{label}}
+                <input v-bind="$attrs" 
+                v-bind:value="value"
+                v-on:input="$emit('input',$event.target.value）"
+            >
+            </label>
+        })
+     
+    </script> -->
+    <div>
+        <base-checkbox v-model="lovingVue"></base-checkbox>
+    </div>
+    <!-- <script> 
+        Vue.component('base-checkbox',{
+             model:{
+                 prop:'check',
+                 event:'change'
+             },
+             props:{
+                 checked:Boolean
+             },
+             template:
+            <input
+            type="checkbox"
+            v-bind:checked="checked"
+            v-on:change="$emit('change',$event.target.checked)"
+            />
+            })
+    </script> -->
+    <!-- c插槽 -->
+   <div class='container'>
+       <header>
+           <slot name="header"></slot>
+       </header>
+       <main>
+           <slot></slot>
+       </main>
+       <footer>
+           <slot name="footer"></slot>
+       </footer>
+   </div>
+
+   <base-layout>
+   <template v-slot:header>
+       <h1>Here might be a page title</h1>
+   </template>
+   <template v-slot:default>
+        <p>A pargraph for the main content</p>
+
+        <p>And another one.</p>
+    </template>
+   <template v-slot:footer>
+        <p>Here's some contact info</p>
+   </template>
+
+</base-layout>
+
+
+
+<!-- 异步组件：Vue 只有在这个组件需要被渲染的时候才会触发该工厂函数，且会把结果缓存起来供未来重渲染 -->
+<my-component inline-template>
+    <div>
+      <p>These are compiled as the component's own template.</p>
+      <p>Not parent's transclusion content.</p>
+    </div>
+  </my-component>
+
+
+
+  <div id="demo">
+    <button v-on:click="show = !show">
+      Toggle
+    </button>
+    <transition name="fade">
+      <p v-if="show">hello</p>
+    </transition>
+  </div>
+  <script>
+      new Vue({
+  el: '#demo',
+  data: {
+    show: true
+  }
+})
+  </script>
+  <style>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+</style>
+<!-- CSS过渡 -->
+<div id="example-1">
+    <button @click="show = !show">
+      Toggle render
+    </button>
+    <transition name="slide-fade">
+      <p v-if="show">hello</p>
+    </transition>
+  </div>
+  <script>
+      new Vue({
+  el: '#example-1',
+  data: {
+    show: true
+  }
+})
+  </script>
+  <style>
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+  </style>
+  <!-- css动画 -->
+  <div id='ex1'>
+   <button v-on:click="show=!show">Toggle now</button>
+    <transition name="bounce">
+        <p v-if='show'>Lorem ipsum what are you talkiing</p>
+    </transition>     
+ </div>
+ <script>
+     new Vue({
+         el:'#ex1',
+         data:{
+             show:true
+         }
+     })
+ </script>
+ <style>
+ .bounce-enter-active {
+    animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }</style>
+  <!-- 自定义过渡 -->
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+<div id="example-3">
+  <button @click="show = !show">
+    Toggle render
+  </button>
+  <transition
+    name="custom-classes-transition"
+    enter-active-class="animated tada"
+    leave-active-class="animated bounceOutRight"
+  >
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+<script>
+    new Vue({
+  el: '#example-3',
+  data: {
+    show: true
+  }
+})
+
+
+</script>
+<!--
+Velocity 和 jQuery.animate 的工作方式类似，也是用来实现 JavaScript 动画的一个很棒的选择
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+<!-- <div id="example-4">
+  <button @click="show = !show">
+    Toggle
+  </button>
+  <transition
+    v-on:before-enter="beforeEnter"
+    v-on:enter="enter"
+    v-on:leave="leave"
+    v-bind:css="false"
+  >
+    <p v-if="show">
+      Demo
+    </p>
+  </transition>
+</div>
+<script>
+    new Vue({
+  el: '#example-4',
+  data: {
+    show: false
+  },
+  methods: {
+    beforeEnter: function (el) {
+      el.style.opacity = 0
+      el.style.transformOrigin = 'left'
+    },
+    enter: function (el, done) {
+      Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+      Velocity(el, { fontSize: '1em' }, { complete: done })
+    },
+    leave: function (el, done) {
+      Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+      Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+      Velocity(el, {
+        rotateZ: '45deg',
+        translateY: '30px',
+        translateX: '30px',
+        opacity: 0
+      }, { complete: done })
+    }
+  }
+})
+</script> -->
+
+<!-- <div id='ex2'>
+    <transition>
+        <button v-bind:key="isEditing">
+          {{ isEditing ? 'Save' : 'Edit' }}
+        </button>
+      </transition>
+</div>
+<script>
+    var vm=new Vue({
+        el:"#es2",
+        function(){
+            this.isEditing=isEditing
+        }
+    })
+</script> -->
+<!-- <div id='app'>
+    <div id='ex5'>
+        <my-component-name></my-component-name>
+    </div>
+</div> -->
+<!-- <script>
+Vue.component('my-component-name',{
+    template:""
+})
+new Vue({el:'#ex5'})
+</script> -->
+
+<!-- 原生标签 -->
+<div id='app'>
+    <input  v-model='info'>
+    <button  @click='handleclick'>添加</button>
+    <ul>
+        <li v-for="item in items">{{item}}</li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            items:[],
+            info:''
+        },
+        methods:{
+            handleclick(){
+                console.log(this.info)
+                this.items.push(this.info),
+                this.info=''
+            }
+        }
+    })
+   
+</script>
+<style>
+    .item{
+        color:red;
+    }
+</style>
+<!-- 自定义标签: -->
+<div id="app2">
+    <input  v-model='info'>
+    <button  @click='handleclick'>添加</button>
+    <ul>
+    <todo-item v-for="item in items" v-bind:item='item'></todo-item>
+    </ul>
+</div>
+<script>     //
+Vue.component('todo-item',{  //todo-item为全局组件
+    props:["item"],  //对差值语法进行定义
+    template:'<li class="item">{{item}}</li>'
+})
+new Vue({
+    el:"#app2",
+    data:{  
+        items:[],
+        info:''
+    },
+    methods:{
+        handleclick(){
+            this.items.push(this.info),
+            this.info=''
+        }
+    }
+})
+</script>
+<div id='vue-prop-one'>
+    <blog-post post-title='hWWWWo' post-name='vue.js' real-name='gantian'></blog-post>
+    <!-- <blog-post>SFD</blog-post> -->
+</div>
+<script>
+   
+    Vue.component('blog-post',{
+        props:['postTitle','postName','realName'],
+        template:'<div><span>{{postTitle}}</span><h2>{{postName}} +{{realName}}</h2></div>'
+    })
+
+    new Vue({
+        el:'#vue-prop-one'
+    })
+    
+</script>
+</body>
+</html>
