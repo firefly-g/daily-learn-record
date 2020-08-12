@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <section id='todoapp' class="todoapp">
+      <myheader @inpvakue='addTodo'></myheader>
+      <mylist :todos='todos' @dbl-click='aaa' @save-edit='saveEdit' :currentediting='currentediting'
+        @removetodo='removetodo'></mylist>
+      <myfotter :leftcount='leftCount' @delete-all-done='removeAllDone'></myfotter>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var myheader = {
+      template: `
+  <header class='header'>
+    <h1>todos</h1>
+    <input placeholder='What needs to be done?' @keyuo.enter='addTodoParent' class='new-todo'></input>
+    </header>
+  `,
+      methods: {
+        //用户输入的数据传递到父组件
+        addToParent(event) {
+          var todoText = event.target.value.trim()
+          if (!todoText.length) {
+            return
+          } else {
+            this.$emit('inpvalue', todoText)
+          }
+        }
+      }
+    };
+
+    var mylist = {
+      props: ['todos', 'currentediting'],
+      template: `
+  <section class='main'>
+  <input type='checkbox' v-model='toggleStat1' id='toggle-all' class='toggle-all'></input>
+  <label for='toggle-all'>Mark all as complete</label>  
+  <ul class='todo-list'>
+    <li v-for='(item,index) in todos'
+  </ul>
+  </section>
+  `
+    }
+
+  </script>
+</body>
+
+</html>

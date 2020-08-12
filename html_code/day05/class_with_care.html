@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>点击</button>
+ 
+ <script>
+ var that;
+ var _that;
+ class Star{
+   constructor(name,age){
+     that=this;
+     console.log(this);
+     this.name=name;
+     this.age=age;
+     this.btn=document.querySelector("button")
+     this.btn.onclick=this.sing;
+   }
+   sing(){
+     console.log(this);    //指向button这个按钮
+     console.log(that.name);   //存储的是constructor中的this
+   }
+   dance(){     //指向实例对象a，因为是a调用了它
+    var  _that=this;
+     console.log(this);
+   }
+ }
+ var a=new Star('刘德华');
+ console.log(that===a);     //true
+ a.dance();
+ console.log(_that===a);   //false
+  </script>
+</body>
+</html>

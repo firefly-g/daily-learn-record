@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <script>
+   var o={
+     name:'Andy'
+   }
+   function fn(a,b){
+     console.log(this);
+     console.log(a+b);
+   }
+   var f=fn.bind(o,1,2)  //当我们不需要调用函数，但是又想改变函数内部得this指向时用bind
+   console.log(f);    //不会调用原来的函数，但是可以改变原来函数的内部this指向，返回的是改变this后产生的新函数
+
+   //当点击了一个按钮之后，就禁用者按钮，3秒之后再次开启
+   var btn=document.querySelector('button');
+   btn.onclick=function(){
+     this.disabled=true;  // 此时this指向btn这个按钮
+     setTimeout(function(){
+       this.disabled=false;
+     }.bind(this),3000);
+   }
+ </script>       
+</body>
+</html>

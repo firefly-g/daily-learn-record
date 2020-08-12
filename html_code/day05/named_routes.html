@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <div id="app">
+    <router-link to="/user/1">User1</router-link>
+    <router-link to='/user/2'>User2</router-link>
+    <router-link :to="{name:'user',params:{id:3}}">User3</router-link>
+    <router-link to='/register'>Register</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    const yonghu = {
+      props: ['id', 'uname', 'age'],
+      template: '<h1>User组件---用户为:{{id}}--姓名为：{{uname}}--年龄为：{{age}}</h1>'
+    }
+    const denglu = {
+      template: '<h1>Register组件</h1>'
+    }
+    const router = new VueRouter({
+      routes: [
+        { path: '/', redirect: '/user' },
+        {
+          name: 'user',
+          path: '/user/:id',
+          component: yonghu,
+          props: route => ({ uname: '罗云熙', age: 30, id: route.params.id })
+        },
+        { path: '/register', component: denglu }
+      ]
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+      router
+    })
+  </script>
+</body>
+
+</html>

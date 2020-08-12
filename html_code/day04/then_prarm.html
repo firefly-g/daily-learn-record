@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    //then 参数中的函数返回值
+    function queryData(url){
+      return new Promise(function(resolve,reject){
+        var xhr=new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+          if(xhr.readyState!=4) return ;
+          if(xhr.readyState==4&&xhr.readyStatus==200){
+            resolve(xhr.responseText);
+          }else{
+            reject('服务器错误');
+          }
+        };
+        xhr.open('get',url);
+        xhr.send(null);
+      });
+    }
+    queryData('http://localhost:3000/data').then(function(data){
+      return queryData('http://localhost:3000/data1');
+    }).then(function(data){
+      return new Promise(function(resolve,reject){
+        setTimeout(function(){resole('123');}, 1000)
+      })
+    }).then(function(data){
+      return 'hello';
+    }).then(function(data){
+      cinsole.log(data)
+    })
+  </script>
+  </body>
+  </html>

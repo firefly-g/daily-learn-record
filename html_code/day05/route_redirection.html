@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <router-link to='/user'>User</router-link>
+    <router-link to='/register'>Register</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    const yonghu = {
+      template: '<h1>用户页面</h1>'
+    }
+    const denglu = {
+      template: '<h1>登录页面</h1>'
+    }
+    const router = new VueRouter({
+      routes: [
+        { path: '/', redirect: '/user' },
+        { path: '/user', component: yonghu },
+        { path: '/register', component: denglu }
+      ]
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      router
+    })
+  </script>
+</body>
+
+</html>

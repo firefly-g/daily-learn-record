@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <div id="app">
+    <a href="#/zhuye">主页</a>
+    <a href="#/keji">科技</a>
+    <a href="#/caijing">财经</a>
+    <a href="#/yule">娱乐</a>
+    <component :is='comName'></component>
+  </div>
+  <script>
+    const zhuye = {
+      template: '<h1>主页信息</h1>'
+    }
+    const keji = {
+      template: '<h1>科技信息</h1>'
+    }
+
+    const caijing = {
+      template: '<h1>财经信息</h1>'
+    }
+    const yule = {
+      template: '<h1>娱乐信息</h1>'
+    }
+
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        comName: 'zhuye'
+      },
+      components: {
+        zhuye,
+        keji,
+        caijing,
+        yule
+      }
+    })
+    //监听window的onhashchange事件，根据获取的最新的hash值，切换要显示的h组件名
+    window.onhashchange = function () {
+      console.log(location.hash)
+      switch (location.hash.slice(1)) {
+        case '/zhuye':
+          vm.comName = 'zhuye'
+          break
+        case '/keji':
+          vm.comName = 'keji'
+          break
+        case '/caijing':
+          vm.comName = 'caijing'
+          break
+        case '/yule':
+          vm.comNmae = 'yule'
+          break
+      }
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr=['red','green','blue','pink'];
+    arr.forEach(function(value,index){
+      if(value=='green'){
+        console.log('该元素在'+index+1);
+        // return true     //遇见return并不会停止迭代
+      }
+    })
+
+    arr.some(function(value){
+      if(value=='green'){
+        console.log('找到了该元素');
+        return true;    //遇到return停止遍历，效率更高
+      }
+    })
+    arr.filter(function(value){
+      if(value=='green'){
+        consile.log('找到该元素');
+        return true; //不会停止迭代
+      }
+    })
+  </script>
+</body>
+</html>

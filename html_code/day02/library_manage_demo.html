@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .grid {
+      margin: auto;
+      width: 530px;
+      text-align: center;
+    }
+
+    .grid table {
+      border-top: 1px solid rebeccapurple;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .grid th,
+    td {
+      padding: 10;
+      border: 1px dashed gray;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .grid th {
+      background-color: rgb(131, 101, 116);
+    }
+
+    .grid .book {
+      padding-bottom: 10px;
+      padding-top: 5px;
+      background-color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class='grid'>
+      <div>
+        <h1>图书馆管理</h1>
+        <div class="book">
+          <div>
+            <label for='id'>
+              编号：
+            </label>
+            <input type="text" id='id' v-model='id' :disabled='flag'></input>
+            <label for='name'>
+              名称：
+            </label>
+            <input type="text" id='name' v-model='name'></input>
+            <button @click='handle'>提交</button>
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr :key='item.id' v-for='item in books'>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date|format('yyyy-MM-dd hh:mm:ss')}}</td>
+            <td>
+              <a href='' @click.prevent='toEdit(item.id)'>修改</a>
+              <span>|</span>
+              <a href='' @click.prevent='deleteBook(item.id)'>删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    // 给 vue 设置一个 filter过滤器,名字是 format的
+  Vue.filter('format',function(value,arg){
+  function dateFormat(date,format){
+    console.log(date)
+    if(date === ''){
+      return '';
+    }
+    if(typeof date ==="string"){
+      var mts=date.match(/(\/Date\((\d+)\)\/)/);
+      if(mts && mts.length>=3){
+        date=parseInt(mts[2]);
+      }
+    }
+    // 确保 date 是 Date 类型的
+    date =new Date(date);
+    if(!date||date.toUTCString()=="Invalid Date"){
+      return "";
+    }
+    var map={
+      "M":date.getMonth()+1,
+      "d":date.getDate(),
+      "h":date.getHours(),
+      "m":date.getMinutes(),
+      "s":date.getSeconds(),
+      "q":Math.floor((date.getMonth()+3)/3),
+      "S":date.getMilliseconds()
+    };
+    format=format.replace(/([yMdhmsqS])+/g,function(all,t){
+      // console.log(all)
+      var v= map[t];
+      if(v!==undefined){
+        if(all.length>1){
+          // console.log(v)
+          v = '0' + v;
+          // console.log(v)
+          v = v.substr(v.length-2);
+          // console.log(v)
+          // console.log('----------')
+        }
+        return v;
+      }else if(t==='y'){
+        // console.log(typeof date.getFullYear())
+        // console.log(typeof (typeof date.getFullYear()+''))
+        // 用正则表达式  2020 0
+        return (date.getFullYear()+'').substr(4-all.length);
+      }
+      return all;
+    });
+    // console.log(format)
+    // format = format.replace('-',' gt ')
+    return format;
+  }
+  return dateFormat(value,arg);
+});
+
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        books: [{
+          id: 1,
+          name: '三国演义',
+          date: new Date()
+        }, {
+          id: 2,
+          name: '水浒传',
+          date: new Date()
+        },
+        {
+          id: 3,
+          name: '红楼梦',
+          date: new Date()
+        }, {
+          id: 4,
+          name: '西游记',
+          date: new Date()
+        }],
+        id: '',
+        name: '',
+        flag: false
+
+      },
+      methods: {
+        // handle: function () {
+        //   var book = {};
+        //   book.id = this.id;
+        //   book.name = this.name;
+        //   book.date = '';
+        //   this.books.push(book);
+        //   this.id = '';
+        //   this.name = '';
+        // }
+        handle: function () {
+          // 如果 flag 是 true的话,那么就是修改
+          if (this.flag) {
+            this.books.some((item) => {
+              if (item.id == this.id) {
+               item.name = this.name;
+                return true;
+              }
+            });
+            this.flag = false;
+          } else {
+            // else 的话,flag是false,那么就是添加
+            var book = {};
+            book.id = this.id;
+            book.name = this.name;
+            book.date = new Date();
+            this.books.push(book);
+            this.id = '';
+            this.name = '';
+          }
+          this.id = '';
+            this.name = '';
+        },
+        toEdit: function (id) {
+          // debugger
+          this.flag = true;
+          console.log(id);
+          var book = this.books.filter(function (item) {
+            return item.id == id;
+          });
+          console.log(book);
+          this.id = book[0].id;
+          this.name = book[0].name;
+        },
+        deleteBook:function(id){
+          var index=this.books.findIndex(function(item){
+            return item.id==id;
+          });
+          this.books.splice(index,1);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

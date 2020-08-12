@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=<div id=>, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>{{msg}}</div>
+   <div v-text='msg'></div>  <!-- //填充数据，作用与插值类似，但无闪动现象 -->
+     <div v-html='msg1'></div>       <!--将标签填入到标签中，但可能有安全问题-->
+    <div v-pre>{{msg}}</div>    <!-- 显示原始信息-->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+  
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      msg:'Hello tomo',
+      msg1:'<h1>HTML</h1>'
+
+    }
+  })
+</script>
+</body>
+</html>

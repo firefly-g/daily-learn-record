@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <div id="app">
+    <router-link to="/user">User</router-link>
+    <router-link to="/register">Register</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    const yonghu = {
+      template: '<h1>用户页面</h1>'
+    }
+    const denglu = {
+      template: `
+      <div>
+        <h1>登录页面</h1>
+        </hr> 
+        <router-link to='/register/tab1'>卖家登陆页面</router-link>
+        <router-link to='/register/tab2'>买家登录页面</router-link>
+        <router-view></router-view>
+      </div>`
+    }
+    const tab1 = {
+      template: '<h2>我是卖家</h2>'
+    }
+    const tab2 = {
+      template: '<h2>我是买家</h2>'
+    }
+    const router = new VueRouter({
+      routes: [
+        { path: '/', redirect: '/user' },
+        { path: '/user', component: yonghu },
+        {
+          path: '/register', component: denglu, children: [
+            { path: '/register/tab1', component: tab1 },
+            { path: '/register/tab2', component: tab2 }
+          ]
+        }
+
+      ]
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+      router
+    })
+  </script>
+</body>
+
+</html>

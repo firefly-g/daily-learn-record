@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=clearContnet, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <div id="app">
+    <!-- //修饰符的名字是自定义的 ，但对应的值必须按照对应的keyCode值-->
+    <input type="text" @keyup.aaa='handle' v-model='info'/>
+  </div>
+  <script>
+    Vue.config.keyCodes.aaa=65;
+    var vm= new Vue({
+      el:'#app',
+      data:{
+        info:'',
+      },
+      methods: {
+        handle:function(event){
+          console.log(event.keyCode)
+        }
+      },
+    })
+  </script>
+</body>
+</html>

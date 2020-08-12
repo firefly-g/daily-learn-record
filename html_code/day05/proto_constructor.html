@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Star(name,age){
+      this.name=name;
+      this.age=age;
+    }
+    //利用constructor手动指回原来的构造函数Star.prototype
+    Star.prototype={
+      constructor:Star,
+      sing:function(){
+        console.log("我会唱歌");   
+      },
+      movie:function(){
+        console.log("我还会演电影");
+      }
+    }
+    var a=new Star('刘德华',44);
+    var b= new Star('张学友',55)
+    console.log(Star.prototype)
+    console.log(a.__proto__);
+    console.log(Star.prototype.constructor);
+    console.log(a.__proto__.constructor)
+  </script>
+</body>
+</html>

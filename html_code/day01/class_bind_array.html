@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      border:1px solid red;
+      width: 200px;
+      height: 200px;
+      }
+      .error{
+        background-color: pink;
+      }
+  </style>
+
+</head>
+<body>
+  <div id="app">
+    <div :class='[activeClass,errorClass]'>测试样式</div>
+    <button @click='handle'>切换</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var vm=new Vue({
+        el:'#app',
+        data:{
+          activeClass:'active',
+          errorClass:'error'
+        },
+        methods:{
+          handle(){
+            this.activeClass='';
+            this.errorClass='';
+          }
+        }
+      })
+    </script>
+  
+</body>
+</html>

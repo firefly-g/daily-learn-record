@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div v-if='score>=90'>优秀</div>
+    <div v-else-if='score<90&&score>=80'>良好</div>
+    <div v-else-if='score<80&&score>60'>一般</div>
+    <div v-else>比较差</div>
+    <div v-show='isShow'>出来啦</div>
+    <button @click='handle'>点击</button>
+    <button @click='changeExcellent'>变优秀</button>
+    <button @click='changeGoods'>变良好</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+ 
+   function printName(){
+     console.log('打印最外层的方法');
+   } 
+
+    var vm=new Vue({
+      el:'#app',
+      data:{
+        score:61,
+        isShow:false
+      },
+      methods:{
+       
+      handle:function(){
+          console.log("进入");
+          // this 理解的不够.
+          this.isShow=!this.isShow;
+          this.printName();
+        },
+        printName:function(){
+        console.log('测试调用打印方法');
+      },
+      changeExcellent:function(){
+        console.log('进入优秀的')
+        this.score = 91;
+        console.log(this.score)
+      },
+      changeGoods:function(){
+        this.score=85;
+      },
+      }
+    })
+  </script>
+</body>
+</html>

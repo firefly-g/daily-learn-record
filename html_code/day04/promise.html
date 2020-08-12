@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=33, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id=''>前后端交互</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    $.ajax({
+      url: 'http://localhost:3000/data',
+      sucess: function (data) {
+        console.log(data);
+        $.ajax({
+          url: 'http://localhost:3000/data1',
+          sucess: function (data) {
+            console.log(data);
+            $.ajax({
+              url: 'http://lcalhost:3000/data2',
+              sucess: function (data) {
+                console.log(data)
+              }
+            });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

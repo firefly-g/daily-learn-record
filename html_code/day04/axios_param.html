@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="text/javascript" src="js/axios.js"></script>
+  <script>
+    //axios get 请求传参
+    axios.get('http://localhost:3000/axios?id=123').then(function (ret) {
+      console.log(ret.data);
+    })
+    axios.get('http://localhost:3000/axios/123').then(function (ret) {
+      console.log(ret.data);
+    })
+    axios.get('http://localhost:3000/axios', {
+      params: {
+        id: 789
+      }
+    }).then(function (ret) {
+      console.log(ret.data)
+    })
+
+    //axios delete请求传参
+
+    axios.delete('http://localhost:3000/axios', {
+      params: {
+        id: 111
+      }
+    }).then(function (ret) {
+      console.log(ret.data)
+    })
+
+    axios.post('http://localhost:3000/axios', {
+      uname: 'Sunny',
+      pwd: 123
+    }).then(function (ret) {
+      console.log(ret.data);
+    })
+    var params = new URLSearchParams();
+    params.append('uname', '李大头');
+    params.append('pwd', '111');
+    axios.post('http://localhost:3000/axios', params).then(function (ret) {
+      console.log(ret.data);
+    })
+
+    //axios put 请求传参
+    axios.put('http://localhopst:3000/axios/123', {
+      uname: '王大头',
+      pwd: 123
+    }).then(function (ret) {
+      console.log(ret.data);
+    })
+  </script>
+</body>
+
+</html>

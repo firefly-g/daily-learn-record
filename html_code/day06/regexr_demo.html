@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var reg=/abc/  ;  //只要包含abc就可以了
+    var rg=/[abc]/;  //包含a或b或c的都可以
+
+    var rg1=/^[abc]$/ //三选一，只有是a,或者b,或者c这三个字母才返回true
+    console.log(rg1.test('aaa'));    //false
+    console.log(rg1.test('a'));      //true
+
+    var a=/^[a-z]$/   //a到z的任意一个字母存在返回true
+
+    var b=/^[a-zA-Z0-9_-]$/   //26个英文字母任何一个返回true
+    console.log(b.test(123))   //false
+
+    var c=/^[^a-zA-Z0-9_-]$/  //括号里面有^表示取反得意思
+    console.log(c.test(123))   //false
+    console.log(c.test('!'))   //true
+
+
+  </script>
+</body>
+</html>

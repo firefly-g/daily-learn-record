@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .tab ul{
+      overflow:hidden;   /* 内容会被修剪且其余内容不可见 */
+      padding:0;
+      margin:0;
+    }
+    .tab ul li{
+      box-sizing:border-box;  /*并排放置两个带边框的框*/
+      padding:0;
+      float: left;
+      width:150px;
+      height:45px;
+      line-height: 45px;
+      list-style:none;
+      text-align: center;       /*设置文本的对其方式*/
+      border-top: 1px solid pink;  /*上边框的样式*/
+      border-right: 1px solid blue;
+      cursor:pointer;          /*光标的形状为一只手*/
+    }
+    .tab ul li:first-child{
+      border-left: 1px solid green;
+    }
+    .tab ul li.active{
+      background-color:purple ;
+    }
+    .tab div{
+      width: 500px;
+      height: 300px;
+      display: none;   /*元素不会被显示*/
+      text-align: center;
+      line-height:30px;
+      font-size:30px;
+      border: 10px solid yellow;
+      border-top: 0px;
+    }
+    .tab div.current{
+      display: block;   /*此元素会被显示为块级元素，元素前后会有换行符*/
+    }
+  </style>
+</head>
+<body>
+  <div id='app'>
+    <div class="tab">
+
+      <ul>
+        <li @click='change(index)' :class='currentIndex==index?"active":""' 
+            :key="item.id" v-for='(item,index) in list'>{{item.title}}  ---- {{item.age}}</li>
+      </ul>
+
+      <div :class='currentIndex==index?"current":""' :key="item.id" v-for='(item,index) in list'>
+        <img :src="item.path">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div id="app">
+<div>
+  <ul >
+    <li @click='change(index)' :class='currentIndex==index?active'></li>
+  </ul>
+</div>
+  </div> -->
+<!-- <div id="app">
+  <div  class="tab">
+    <ul>
+      <li  @click='change(index)' :class='currentIndex==index?"active":""' v-for='(item,index) in list' :key='item.id' 
+      >{{item.title}}</li>
+    </ul>
+
+      <div :class='currentIndex==index?"current":""' :key='item.id' v-for='(index,item) in list' ></div>
+      <img :src="item.path">
+    
+  </div>
+</div> -->
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./js/vue.js"></script>
+  <script>
+    // var vm= new Vue({
+    //   el:'#app',
+    //   data:{
+    //     list:[{
+    //       id:1,
+    //       title:'apple',
+    //       path:'./img/apple.png',
+    //       age:12
+    //     },{
+    //       id:2,
+    //       title:'lemon',
+    //       path:'./img/lemon.png',
+    //       age:13
+    //     },
+    //   {
+    //     id:3,
+    //     title:'orange',
+    //     path:'./img/orange.png',
+    //     age:14
+
+    //   }],
+    //   currentIndex:0
+    //   },
+    //   methods:{
+    //     change:function(index){
+    //       this.index=index;
+    //     }
+    //   }
+    // })
+    var vm =new Vue({
+      el:'#app',
+      data:{
+        currentIndex:0,
+        list:[{
+          id:1,
+          title:'apple',
+          path:'./img/apple.png',
+          age: 2
+        },{
+          id: 2,
+          title:'orange',
+          path:'./img/orange.png',
+          age: 4
+        },{
+          id: 3,
+          title:'banana',
+          path:'./img/lemon.png',
+          age: 6
+        }]
+      },
+      methods:{
+        change:function (index){
+          this.currentIndex=index;
+        }
+      }
+    })
+
+  </script>
+
+</body>
+</html>

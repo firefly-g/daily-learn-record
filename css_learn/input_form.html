@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button[disabled] {
+      cursor: default;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    input[type='search'] {
+      color: pink;
+    }
+
+    div[class^="icon"] {
+      color: red;
+    }
+    div[class$="icon"]{
+      color:green;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="">
+    <ul>
+      <li>邮箱：<input type="email"></input></li>
+      <li>网址：<input type="url"></input></li>
+      <li>日期：<input type="date"></input></li>
+      <li>日期：<input type="time"></input></li>
+      <li>数量：<input type="number"></input></li>
+      <li>手机号：<input type="tel"></input></li>
+      <li>搜索：<input type="esearch"></input></li>
+      <li>颜色：<input type="color"></input></li>
+      <li><input type="submit" value="提交"></input></li>
+    </ul>
+
+    用户名：<input type="text" required="required" placeholder="请输入用户名" name="username" autocomplete="off"></input>
+    上传图像：<input type="file" name="id" multiple="multiple"></input>
+  </form>
+
+  <button>按钮</button>
+  <button>按钮</button>
+  <button disabled="disabled">按钮</button>
+  <button disabled="disabled">按钮</button>
+
+  <input type="text" name="id" value="文本框"></input>
+  <input type="text" name="id" value="文本框"></input>
+  <input type="text" name="id" value="文本框"></input>
+  <input type="search" name="id" value="搜索框"></input>
+  <input type="search" name="id" value="搜索框"></input>
+  <input type="search" name="id" value="搜索框"></input>
+
+  <div class="icon1">图标1</div>
+  <div class="icon1">图标2</div>
+  <div class="iicon1">图标3</div>
+  <div class="absicon">图标5</div>
+
+</body>
+
+</html>

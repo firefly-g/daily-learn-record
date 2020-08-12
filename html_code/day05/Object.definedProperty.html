@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //defineProperty定义新属性或修改已有属性
+    var obj={
+      id :1,
+      panme:'小米',
+      price:1999
+    };
+    Object.defineProperty(obj,'num',{
+      value:1000,
+      enumerabel:true
+    });
+    console.log(obj);
+    Object.defineProperty(obj,'price',{
+      value:9.9
+    });
+    console.log(obj);
+  </script>
+</body>
+</html>

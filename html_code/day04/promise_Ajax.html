@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    function queryData(url){
+      var p=new Promise(function(resolve,reject){
+        var xhr= new XMLHttpRequest();
+        xhr.onreadystatechange=function(){
+          if(xhr.readeyState!=4) return;
+          if(xhr.readeyState==4&&xhr.status==200){
+            resolve(xhr.responseText);
+          }else{
+            reject('服务器错误');
+          }
+        };
+        xhr.open('get',url);
+        xhr.send(null)
+      });
+      return p;
+    }
+
+    //发送多个请求并保证顺序
+    queryData('http://localhost:3000/data').then(function(data){
+      console.log(data);
+      return queryData('http://localhost:3000/data1');
+    }).then(function(data){
+      console.log(data);
+      return queryData('http://localhost:3000/data2');
+    }).then(function(data){
+      console.log(data);
+    })
+  </script>
+</body>
+</html>

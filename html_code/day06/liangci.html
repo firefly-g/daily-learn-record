@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+//量词符，设定某个模式出现的次数
+var reg=/^a$/;
+console.log(reg.test('a'));  //true
+console.log(reg.test('aa'))  //false
+
+var a=/^a*$/;  //表示a可以出现0次或者多次 * >=0次
+console.log(a.test('a'));  //true
+console.log(a.test('aa'));  //true
+console.log(a.test('')); 
+
+var b=/^a+$/; //+相当于出现一次或者多次  + >=1次
+console.log(b.test('aa'));
+
+var c=/^a?$/;               //?相当于 1||0
+console.log(c.test('aa')); //false
+console.log(c.test(''));  //true
+
+var d=/^a{3}$/;
+console.log(d.test('aa'));  //false
+console.log(d.test('aaa'));  //true
+
+  //{3,}大于等于3
+console.log(e.test('aaaa'));  //true
+
+var f=/^a{3,10}$/;  //大于等于3，小于等于10
+console.log(f.test('aaaaaaaaaaaa')); 
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-focus></input>
+    <input type="text" ></input>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    //自定义指令
+    Vue.directive('focus',{inserted:function(el){   //el:指令所绑定的元素
+      el.focus();
+    }
+  })
+    var vm=new  Vue({
+     el:'#app',
+     data:{
+
+     },
+     methods:{
+
+     }
+    })
+  </script>
+</body>
+</html>

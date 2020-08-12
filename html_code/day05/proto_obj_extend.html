@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Father(name,age){
+      this.name=name;
+      this.age=age;
+    }
+    Father.prototype.money=function(){
+      console.log('我有1千万');
+    }
+
+   function Son(name,age,score){
+     Father.call(this,name,age);
+    this.score=score;   
+   } 
+   //如果利用对象的形式修改了原型对象，别忘了利用constructor指回原来的构造函数
+   Son.prototype=new Father();      //*************************************
+   Son.prototype.constructor=Son;
+    Son.prototype.exam=function(){
+      console.log('孩子要考试');
+        }
+
+        var a=new Son('刘德华',44);
+        console.log(a);
+        console.log(Father.prototype);
+        console.log(Son.prototype.constructor);
+ </script>
+</body>
+</html>

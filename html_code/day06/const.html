@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    if (true) {
+      const a = 10;
+      if (true) {
+        const a = 20;
+        console.log(a);  //20
+      }
+      console.log(a);   //10
+    }
+
+    const arr = [100, 200];
+    arr[0] = 123;
+
+    console.log(arr)  //[123,200]
+    arr = [1, 2]      //error 不能更改
+  </script>
+</body>
+
+</html>

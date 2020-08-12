@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <form action=''>
+      <div>
+        用户名：
+        <input type='text' @keyup.delete='clearContnet' v-model='uname'/>
+      </div>
+      <div>
+        密码：
+        <input type='text' @keyup.f1='handleSubmit' v-model='pwd'/>
+      </div>
+      <div>
+        <input type="button" @click='handleSubmit' value='提交'/>
+      </div>
+    </form>
+  </div>
+   
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <script>
+        //事件绑定-按键修饰符
+        Vue.config.keyCodes.f1=113;
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            uname:'',
+            pwd:'',
+            age:0
+
+          },
+          methods:{
+            clearContnet:function(){
+              //按delete键时清空用户名
+              this.uname='';
+            },
+            handleSubmit:function(){
+              console.log(this.uname,this.pwd)
+            }
+          }
+        })
+      </script>
+</body>
+</html>

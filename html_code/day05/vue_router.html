@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='app'>
+    <router-link to='/user'>User</router-link>
+    <router-link to='/register'>Register</router-link>
+    <router-link to='/gantian'>甘甜</router-link>
+    <router-view></router-view>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+    const User = {
+      template: '<h1>User 组件</h1>'
+    }
+    const Register = {
+      template: '<h1>Register 组件</h1>'
+    }
+    const gt={
+      template:'<h1>gt 组件</h1>'
+    }
+    const router = new VueRouter({
+      routes: [
+        { path: '/user', component: User },
+        { path: '/register', component: Register },
+        {path:'/gantian',component:gt}
+      ]
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      router     //挂载路由实例对象
+
+    })
+  </script>
+</body>
+
+</html>

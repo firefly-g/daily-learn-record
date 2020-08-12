@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function Star(name,age){
+    this.name=name;
+    this.age=age;
+  }
+  Star.prototype.sing=function(){
+    console.log("我喜欢唱歌");
+  }
+  Star.prototype.sex='女';
+  var a=new Star('刘德华',15);
+  a.sex='男';
+console.log(a.sex);
+console.log(Object.prototype);
+console.log(Star.prototype);
+console.log(a.toString());  //[object Object]
+
+
+</script>
+</body>
+</html>

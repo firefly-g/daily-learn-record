@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Father(name,age){
+      this.name=name;
+      this.age=age;
+    }
+    function Son(name,age,score){
+      Father.call(this,name,age);   //this指向子构造函数得对象实例
+      this.score=score;
+    }
+
+
+    var son=new Son('刘德华',44,99);
+    console.log(son)
+  </script>
+</body>
+</html>

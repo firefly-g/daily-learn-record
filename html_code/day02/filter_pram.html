@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>{{date|format('yyyy-MM-dd hh:mm:ss')}}</div>
+    
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+Vue.filter('format',function(value,arg){
+  function dateFormat(date,format){
+    if(typeof date ==="string"){
+      var mts=date.match(/(\/Date\((\d+)\)\/)/);
+      if(mts && mts.length>=3){
+        date=parseInt(mts[2]);
+      }
+    }
+    // 确保 date 是 Date 类型的
+    date =new Date(date);
+    console.log("++++++++++++++++++++++++")
+    console.log(date);                       //date = Wed Jul 29 2020 00:44:07 GMT+0800 (中国标准时间) {}
+
+    debugger
+    if(!date||date.toUTCString()=="Invalid Date"){
+      return "";
+    }
+    var map={
+      "M":date.getMonth()+1,                              //7
+      "d":date.getDate(),                               //29
+      "h":date.getHours(),                                //0
+      "m":date.getMinutes(),                              //44
+      "s":date.getSeconds(),                              //7
+      "q":Math.floor((date.getMonth()+3)/3),              //
+      "S":date.getMilliseconds()
+    };
+    format=format.replace(/([yMdhmsqS])+/g,function(all,t){
+      // console.log(all)//yyyy    t=y   MM M
+      var v= map[t];
+      if(v!==undefined){
+        if(all.length>1){
+          // console.log(v)
+          v = '0' + v;
+          // console.log(v)
+          v = v.substr(v.length-2);
+          // console.log(v)
+          // console.log('----------')
+        }
+        return v;
+      }else if(t==='y'){
+        // console.log(typeof date.getFullYear())
+        // console.log(typeof (typeof date.getFullYear()+''))
+        // 用正则表达式  2020 0
+        return (date.getFullYear()+'').substr(4-all.length);
+      }
+      return all;
+    });
+    // console.log(format)
+    // format = format.replace('-',' gt ')
+    return format;
+  }
+  return dateFormat(value,arg);
+});
+
+var vm=new Vue({
+  el:'#app',
+  data:{
+    date:new Date()
+  }
+})
+
+</script>
+</body>
+</html>

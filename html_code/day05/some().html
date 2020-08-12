@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //some查找数组中是否有满足条件的元素
+    var arr1 = [19, 30, 49];
+    var arr = ['pink', 'red', 'blue'];
+    var res = arr.some(function (value) {
+      return value == 'pink';
+    })
+    console.log(res);  //true  some 查找满足条件的元素是否存在，返回一个bool值，查找到第一个满足条件的元素就中止循环！！！
+  </script>
+</body>
+
+</html>

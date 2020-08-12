@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const sum=(n1,n2)=>n1+n2;
+    // const result=sum(10,20);
+    // console.log(result);
+    
+    // // const fn=v=>alert(v);
+    // // fn(20)
+    
+
+    // function fn(){
+    //   console.log(this);
+    //   return ()=>{
+    //     console.log(this);
+    //   }
+    // }
+    // const obj={name:'Susan'};
+    // const resfn=fn.call(obj);
+    //   var age=100;
+    //   var obj={
+    //     age:20,
+    //     say: ()=>{
+    //       alert(this.age);
+    //     }
+    //   }
+    //   obj.say();   //100
+    // // resfn()
+
+    // let arr1=['张三','李四','王五'];
+    // let [s1,...s2]=arr1;
+    // console.log([s1,...s2])
+    let ary=['a','b','c'];
+    console.log(...ary)
+    let ary1=['d','e','f'];
+    let ary2=[...ary,...ary1]
+    console.log(ary2)
+  </script>
+</body>
+</html>

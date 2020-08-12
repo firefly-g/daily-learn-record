@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function fn(){console.log(this)}//普通函数的this指向window、
+  fn()
+  var f=function(){}
+  var f=new Function('a','b','console.log(a+b)')
+  console.log(f instanceof Object)
+var o ={
+  say:function(){
+    console.log(this)
+  }
+}
+console.log(o.say())  //对象方法的this指向对象o
+function Star(){}
+Satr.prototype.sing=function(){}
+var a=new Star()  // 构造函数this指向实例对象
+ var btn=document.querySelector('button');
+ btn.onclick=function(){
+   console.log(this)         //绑定事件函数指向函数调用者btn这个按钮对象
+ }
+
+
+window.setTimeout(function(){
+  console.log(this)
+},1000)                                 //定时器函数this指向window
+
+(function(){
+  console.log(this)
+})()
+</script>  
+</body>
+</html>
