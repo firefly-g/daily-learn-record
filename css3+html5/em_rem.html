@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+    em
+         em相对于(自身）元素字体大小来计算的
+         1em=1 font-size   
+         默认下为16px 随着字体的大小改变而改变
+
+
+    rem   
+    rem相对于根元素的字体大小改变而改变
+
+         */
+         html{
+             font-size: 10px;
+         }
+    .box{
+        font-size: 20px;
+        width: 10em;
+        height: 10em;
+        background-color: salmon;
+
+
+    }
+
+    .box1{
+        
+        width: 10rem;
+        height: 10rem;
+        background-color: sandybrown;
+    }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box1"></div>
+</body>
+</html>

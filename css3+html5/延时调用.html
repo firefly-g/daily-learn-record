@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <style>
+      .box{
+          width: 200px;
+          height: 200px;
+          background-color: seagreen;
+          position: absolute;
+      }
+  </style>
+</head>
+<body>
+    <button class="btn">点击我，让div移动</button>
+    <div class="box"></div>
+
+    <script>
+        window.onload=function(){
+            // 获取元素
+            var box=document.querySelector('box');
+            var btn=document.querySelector('btn');
+            //点击按钮以后，让box1向右移动(left值增大)
+            btn.onlick=function(){
+                // 开启一个定时器用来执行动画效果
+                setInterval(() => {
+                    // 获取box原来的left值
+                    var oldvalue=box.offsetLeft;
+                    alert(oldvalue);
+                }, 30);
+               
+            }
+
+        }
+    </script>
+</body>
+</html>

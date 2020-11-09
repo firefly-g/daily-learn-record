@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: sandybrown;
+            position: absolute;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        window.onload=function(){
+            var speed=10;
+            // 创建一个变量表示方向
+            // var dir=0;
+            // 开启一个定时器
+            setInterval(() => {
+                 // 37 左  38 上  39 右 40 下
+                 switch(dir){
+                    case 37:
+                        box.style.left=box.offsetLeft-speed+'px';
+                        break;
+                    case 39:
+                        box.style.left=box.offsetLeft+speed+'px';
+                        break;
+                    case 38:
+                        box.style.top=box.offsetTop-speed+'px';
+                        break;
+                    case 40:
+                        box.style.top=box.offsetTop+speed+'px';
+                        break;
+                } 
+
+            }, 30);
+            // 为document绑定一个按键按下事件
+            document.onkeydown=function(event){
+                // 获取元素
+                box=document.getElementById('box');
+                event=event||window.event;
+                // 定义一个变量来表示移动的速度
+                // var speed=10;
+                // 当用户按下ctrl以后，速度加快
+                if(event.ctrlkey){
+                    speed=500;
+                }else{
+                    speed=10;
+                }
+                dir=event.keyCode;
+                // // 37 左  38 上  39 右 40 下
+                // switch(event.keyCode){
+                //     case 37:
+                //         box.style.left=box.offsetLeft-speed+'px';
+                //         break;
+                //     case 39:
+                //         box.style.left=box.offsetLeft+speed+'px';
+                //         break;
+                //     case 38:
+                //         box.style.top=box.offsetTop-speed+'px';
+                //         break;
+                //     case 40:
+                //         box.style.top=box.offsetTop+speed+'px';
+                //         break;
+                // } 
+
+
+            }
+            // 当按键松开时，div不再移动
+            document.onkeyup=function(){
+                dir=0;
+            }
+        }
+            </script>
+</body>
+</html>

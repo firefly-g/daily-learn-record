@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            border: 1px solid red;
+            /* overflow: hidden;   */
+          
+        }
+        .box2{
+            width: 200px;
+            height: 300px;
+            background-color: pink;
+            float: left;
+        }
+
+        .box1::after{
+            clear: both;
+            content: '';
+            display: block;
+        }
+        /* .box3{
+            clear: both;
+             借助box3将box2的高度让box1撑起来 
+        } */
+    </style>
+</head>
+<body>
+   <div class="box1">
+       <div class="box2"></div>
+       <!-- <div class="box3"></div>    -->
+   </div>
+ 
+
+
+</body>
+</html>

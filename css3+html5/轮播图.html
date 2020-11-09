@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id='img1' src="./css/1.jpg">
+
+    <script>
+        window.onload = function () {
+            //  获取图片
+            var img1 = document.getElementById('img1');
+            //    创建一个数组来保存图片的路径
+            var imgArr = ['./css/1.jpg', './css/2.jpg', './css/3.jpg', './css/4.jpg', './css/5.jpg'];
+            //    创建一个对象，用来保存当前图片的索引
+            var index = 0;
+            // 定义一个变量，用来保存定时器的标识
+            var timer;
+            // // 开启定时器，自动切换图片
+            // setInterval(() => {
+            //     // 让索引自增
+
+            //     index++;
+            //     // 判断索引是否超过最大值
+            //     // if(index>=imgArr.length){
+            //     //     // 将index设置为0
+            //     //     index=0;
+            //     // }
+            //     // 利用算法进行优化
+            //     // index=index % imgArr.length;
+            //     index%= imgArr.length;
+            //     // 修img1的属性
+            //     img1.src=imgArr[index];
+            // }, 1000);
+            var btn = document.getElementById('btn');
+            btn.onclick = function () {
+                // 开启定时器，自动切换图片
+                timer = setInterval(() => {
+                    // 让索引自增
+
+                    index++;
+                    // 判断索引是否超过最大值
+                    // if(index>=imgArr.length){
+                    //     // 将index设置为0
+                    //     index=0;
+                    // }
+                    // 利用算法进行优化
+                    // index=index % imgArr.length;
+                    index %= imgArr.length;
+                    // 修img1的属性
+                    img1.src = imgArr[index];
+                }, 1000);
+            }
+
+            //    为btn2绑定一个单击响应事件
+            var btn2 = document.getElementById('btn2');
+            btn2.onclick = function () {
+                //    点击按钮之后停止切换
+                clearInterval(timer);
+                
+
+            }
+        }
+    </script>
+    <br />
+    <button id="btn">开始</button>
+    <button id="btn2">结束</button>
+
+</body>
+
+</html>
